@@ -1,0 +1,74 @@
+package net.openjdk.api.v1.release.binary.controller;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import net.openjdk.api.v1.release.binary.service.BinaryAPI;
+import net.openjdk.api.v1.release.information.models.InfoSchema;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
+
+
+@RestController
+@RequestMapping("/v1/release")
+@Tag(name = "OpenJDK Release Binaries API")
+public class BinaryController {
+
+    @Autowired
+    private BinaryAPI binaryAPI;
+
+    @Operation(summary = "Get a list of all available OpenJDK release binaries")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found OpenJDK release binaries",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = InfoSchema.class)) })
+    })
+    @RequestMapping(
+            value = "/binaries",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            method = RequestMethod.GET
+    )
+    @ResponseStatus(HttpStatus.OK)
+    public ObjectNode binaries() {
+        return binaryAPI.toJSON();
+    }
+
+    @Operation(summary = "Get the particular binary URL via HTTP 307")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "307", description = "Found OpenJDK release binary URL"),
+            @ApiResponse(responseCode = "404", description = "Not Found")
+    })
+    @RequestMapping(
+            value = "/binaries/{version}/{os_family}/{os_arch}",
+            produces = MediaType.TEXT_PLAIN_VALUE,
+            method = RequestMethod.GET
+    )
+    @ResponseStatus(HttpStatus.TEMPORARY_REDIRECT)
+    public ResponseEntity<String> getBinary(
+            @Parameter(description = "OpenJDK release version", example = "14.0.1+0") @PathVariable String version,
+            @Parameter(description = "Operating system family", example = "macOs") @PathVariable String os_family,
+            @Parameter(description = "Operating system architecture", example = "x64") @PathVariable String os_arch
+            ) {
+        var url = binaryAPI.getBinaryURL(version, os_family, os_arch);
+        if (Objects.nonNull(url)) {
+            var headers = new HttpHeaders();
+            headers.add("Location", url);
+            return new ResponseEntity<>(headers, HttpStatus.TEMPORARY_REDIRECT);
+        }
+
+        return new ResponseEntity<>(String.format("OpenJDK binary version: '%s' not found for %s/%s",
+                version, os_arch, os_arch), HttpStatus.NOT_FOUND);
+    }
+
+}
