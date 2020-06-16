@@ -20,6 +20,12 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.13.1</version>
+		</dependency>
+
 		<!--OpenAPI v3 dependency-->
 		<dependency>
 			<groupId>org.springdoc</groupId>

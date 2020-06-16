@@ -25,18 +25,19 @@ public class RestApiServiceApplication {
 	}
 
 	@Bean
-	public OpenAPI customOpenAPI(@Value("${application-description}") String appDesciption,
-								 @Value("${application-version}") String appVersion) {
+	public OpenAPI customOpenAPI(@Value("${application.openapi.description}") String description,
+								 @Value("${application.openapi.version}") String version,
+								 @Value("${application.openapi.server}") String appServer) {
 		var oa = new OpenAPI();
 		oa = new OpenAPI().info(new Info()
 				.title("OpenJDK API (OpenAPI V3)")
-				.version(appVersion)
-				.description(appDesciption)
+				.version(version)
+				.description(description)
 				.termsOfService("https://openjdk.java.net/legal/tou/")
 				.license(new License().name("GNU General Public License, version 2,\n" +
 						"with the Classpath Exception").url("https://openjdk.java.net/"))
 		);
-		oa.setServers(Collections.singletonList(new Server().url("http://localhost:8080")));
+		oa.setServers(Collections.singletonList(new Server().url(appServer)));
 
 		return oa;
 	}

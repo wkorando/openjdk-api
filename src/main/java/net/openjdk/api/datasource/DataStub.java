@@ -15,18 +15,18 @@ import java.util.stream.Stream;
 
 public class DataStub implements DataSourceInterface{
 
-    public final static VersionSchema v14 = new VersionSchema("14", "0", "1",
+    final static VersionSchema v14 = new VersionSchema("14", "0", "1",
             "0", VersionTypeSchema.GA());
 
-    public final static OSSchema lin = new OSSchema("x64", "linux");
-    public final static OSSchema macOs = new OSSchema("x64", "macos");
-    public final static OSSchema win = new OSSchema("x64", "windows");
+    final static OSSchema lin = new OSSchema("x64", "linux");
+    final static OSSchema macOs = new OSSchema("x64", "macos");
+    final static OSSchema win = new OSSchema("x64", "windows");
 
-    public final static InfoSchema linX64 = new InfoSchema(lin, v14);
-    public final static InfoSchema macOsX64 = new InfoSchema(macOs, v14);
-    public final static InfoSchema winX64 = new InfoSchema(win, v14);
+    final static InfoSchema linX64 = new InfoSchema(lin, v14);
+    final static InfoSchema macOsX64 = new InfoSchema(macOs, v14);
+    final static InfoSchema winX64 = new InfoSchema(win, v14);
 
-    public final static List<BinarySchema> binaries = Arrays.asList(
+    final static List<BinarySchema> binaries = Arrays.asList(
             new BinarySchema(DataStub.linX64,
                     "https://download.java.net/java/GA/jdk14.0.1/664493ef4a6946b186ff29eb326336a2/7/GPL/openjdk-14.0.1_linux-x64_bin.tar.gz"
     ),

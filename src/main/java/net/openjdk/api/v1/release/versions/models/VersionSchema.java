@@ -44,4 +44,18 @@ public class VersionSchema {
         return getVersion().equalsIgnoreCase(version);
     }
 
+    public String toString() {
+        return getVersion();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        VersionSchema that = (VersionSchema) o;
+
+        return toString().equalsIgnoreCase(that.toString());
+    }
+
 }

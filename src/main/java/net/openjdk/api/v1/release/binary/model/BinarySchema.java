@@ -26,4 +26,8 @@ public class BinarySchema {
         return binaryLink;
     }
 
+    public String toString() {
+        return String.format("%s\n%s\n", releaseInfo.toString(), binaryLink);
+    }
+
 }

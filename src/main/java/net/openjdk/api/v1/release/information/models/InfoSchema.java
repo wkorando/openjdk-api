@@ -32,4 +32,8 @@ public class InfoSchema {
         return os;
     }
 
+    public String toString() {
+        return String.format("%s %s", version.toString(), os.toString());
+    }
+
 }

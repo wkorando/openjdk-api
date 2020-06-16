@@ -29,4 +29,25 @@ public class OSSchema {
         return this.os_family.equalsIgnoreCase(os_family);
     }
 
+    public String toString() {
+        return getAlias();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        OSSchema osSchema = (OSSchema) o;
+
+        return toString().equalsIgnoreCase(osSchema.toString());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = os_family != null ? os_family.hashCode() : 0;
+        result = 31 * result + (os_arch != null ? os_arch.hashCode() : 0);
+        return result;
+    }
+
 }
