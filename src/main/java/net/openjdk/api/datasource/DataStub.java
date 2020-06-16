@@ -7,7 +7,6 @@ import net.openjdk.api.v1.release.versions.models.VersionSchema;
 import net.openjdk.api.v1.release.versions.models.VersionTypeSchema;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -17,6 +16,7 @@ public class DataStub implements DataSourceInterface{
 
     final static VersionSchema v14 = new VersionSchema("14", "0", "1",
             "0", VersionTypeSchema.GA());
+    final static Stream<VersionSchema> versions = Stream.of(v14);
 
     final static OSSchema lin = new OSSchema("x64", "linux");
     final static OSSchema macOs = new OSSchema("x64", "macos");
@@ -39,29 +39,43 @@ public class DataStub implements DataSourceInterface{
         );
 
     @Override
-    public List<VersionSchema> getListOfAvailableVersions() {
-        return Collections.singletonList(v14);
+    public Stream<VersionSchema> getListOfAvailableVersions() {
+        return versions;
     }
 
     @Override
-    public List<OSSchema> getListOfSupportedOperationSystems() {
-        return Arrays.asList(win, lin, macOs);
+    public Stream<VersionSchema> getListOfAvailableVersionsFilteredByMajor(String openJDKmajorVersion) {
+        return versions.filter(x-> openJDKmajorVersion.equalsIgnoreCase(x.getMajor()));
     }
 
     @Override
-    public List<InfoSchema> getListOfReleases() {
-        return Arrays.asList(linX64, macOsX64, winX64);
+    public Stream<OSSchema> getListOfSupportedOperationSystems() {
+        return Stream.of(win, lin, macOs);
     }
 
     @Override
-    public List<BinarySchema> getListOfBinaries() {
-        return binaries;
+    public Stream<InfoSchema> getListOfReleases() {
+        return Stream.of(linX64, macOsX64, winX64);
+    }
+
+    @Override
+    public Stream<BinarySchema> getListOfBinaries() {
+        return binaries.stream();
     }
 
     @Override
     public Stream<BinarySchema> getBinariesPerVersion(String version) {
         return binaries.parallelStream().filter(
                 x-> x.getReleaseInfo().getVersionSchema().isMatch(version)
+        );
+    }
+
+    @Override
+    public Stream<BinarySchema> getBinariesPerMajorVersion(String majorVersion) {
+        return binaries.stream().filter(x-> majorVersion
+                .equalsIgnoreCase(
+                        x.getReleaseInfo().getVersionSchema().getMajor()
+                )
         );
     }
 

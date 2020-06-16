@@ -5,21 +5,22 @@ import net.openjdk.api.v1.release.information.models.InfoSchema;
 import net.openjdk.api.v1.release.operating_systems.models.OSSchema;
 import net.openjdk.api.v1.release.versions.models.VersionSchema;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 
 public interface DataSourceInterface {
 
-    List<VersionSchema> getListOfAvailableVersions();
+    Stream<VersionSchema> getListOfAvailableVersions();
+    Stream<VersionSchema> getListOfAvailableVersionsFilteredByMajor(String openJDKmajorVersion);
 
-    List<OSSchema> getListOfSupportedOperationSystems();
+    Stream<OSSchema> getListOfSupportedOperationSystems();
 
-    List<InfoSchema> getListOfReleases();
+    Stream<InfoSchema> getListOfReleases();
 
-    List<BinarySchema> getListOfBinaries();
+    Stream<BinarySchema> getListOfBinaries();
 
     Stream<BinarySchema> getBinariesPerVersion(String version);
+    Stream<BinarySchema> getBinariesPerMajorVersion(String majorVersion);
     Stream<BinarySchema> getBinariesPerVersionAndOS(String version, String os_family);
     BinarySchema getBinary(String version, String os_family, String os_arch);
 

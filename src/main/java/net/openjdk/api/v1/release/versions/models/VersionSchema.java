@@ -1,6 +1,7 @@
 package net.openjdk.api.v1.release.versions.models;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
@@ -38,6 +39,11 @@ public class VersionSchema {
     @JsonGetter("version")
     public String getVersion() {
         return String.format("%s.%s.%s+%s", major, minor, security, buildNumber);
+    }
+
+    @JsonIgnore
+    public String getMajor() {
+        return major;
     }
 
     public Boolean isMatch(String version) {

@@ -94,16 +94,14 @@ public class JDKdotJAVAdotNET implements DataSourceInterface {
     }
 
     protected void populateEntities(List<Element> info) {
-        // but not all 6 needed, actually
-        // required ones:
+        // required nodes:
         // (index) 0 - OpenJDK release version
         // (index) 1 - windows release binary
         // (index) 2 - macOs release binary
         // (index) 3 - linux binary
         var versionNode = info.get(0);
         var versionSchema = populateVersion(versionNode);
-        var subList = info.subList(1, 4);
-        subList.forEach(i -> populateSingleEntity(i, versionSchema));
+        info.subList(1, 4).forEach(i -> populateSingleEntity(i, versionSchema));
     }
 
     public void parseXML(String rawXML) {
@@ -112,18 +110,34 @@ public class JDKdotJAVAdotNET implements DataSourceInterface {
         var jdkTable = doc.select("table");
         // selecting whatever is a table content
         var tableContent = jdkTable.select("tr");
-        // estimating the size of a table
-        var tableContentSize = tableContent.size();
-        // each complete release consists of 6 rows of a table
-        IntStream.range(0, tableContentSize/6).forEach(i -> {
-            var v = tableContent.subList(i*6, (i+1)*6);
-            populateEntities(v);
+
+        var cleanedTable = tableContent.stream().filter(x -> {
+            // we don't need dummy empty lines
+            var filterDummyNodesRule = x.childNodeSize() ==3 && x.toString().contains("&nbsp");
+            // we don't need source code
+            var filterSourceCOdeRule = x.toString().contains("https://hg.openjdk.java.net");
+            return !(filterDummyNodesRule || filterSourceCOdeRule);
+        }).collect(Collectors.toList());
+
+        var commonCases = cleanedTable.subList(0, cleanedTable.size()-4);
+        var specialCases = cleanedTable.subList(cleanedTable.size()-4, cleanedTable.size());
+
+        // after filtering, in commonCases we have repeatable structure of 4 elements,
+        // so we can iterate through them as group.
+        IntStream.range(0, commonCases.size()/4).forEach(x -> {
+            var task = commonCases.subList(x*4, (x+1)*4);
+            populateEntities(task);
         });
-        // the very first release (JDK 9 GA) table content is abnormal
-        // the binary is available only for 1 operating system
-        var abnormalVersion = tableContent.get(tableContentSize-3);
-        var abnormalBinary = tableContent.get(tableContentSize-2);
-        populateSingleEntity(abnormalBinary, populateVersion(abnormalVersion));
+
+        // after filtering, in specialCases we have unusual thing - 4 elements divided in two groups
+        // so we can iterate through them in the same matter but instead of 4 elements we have only 2:
+        // - version
+        // - single distro element
+        IntStream.range(0, specialCases.size()/2).forEach(x -> {
+            var versionNode = specialCases.get(x*2);
+            var distroNode = specialCases.get(x*2+1);
+            populateSingleEntity(distroNode, populateVersion(versionNode));
+        });
     }
 
     public String readHTML() throws Exception {
@@ -145,29 +159,43 @@ public class JDKdotJAVAdotNET implements DataSourceInterface {
     public JDKdotJAVAdotNET() {}
 
     @Override
-    public List<VersionSchema> getListOfAvailableVersions() {
-        return versions;
+    public Stream<VersionSchema> getListOfAvailableVersions() {
+        return versions.stream();
     }
 
     @Override
-    public List<OSSchema> getListOfSupportedOperationSystems() {
-        return new ArrayList<>(schemas);
+    public Stream<VersionSchema> getListOfAvailableVersionsFilteredByMajor(String openJDKmajorVersion) {
+        return versions.stream().filter(x-> openJDKmajorVersion.equalsIgnoreCase(x.getMajor()));
     }
 
     @Override
-    public List<InfoSchema> getListOfReleases() {
-        return infos;
+    public Stream<OSSchema> getListOfSupportedOperationSystems() {
+        return schemas.stream();
     }
 
     @Override
-    public List<BinarySchema> getListOfBinaries() {
-        return binaries;
+    public Stream<InfoSchema> getListOfReleases() {
+        return infos.stream();
+    }
+
+    @Override
+    public Stream<BinarySchema> getListOfBinaries() {
+        return binaries.stream();
     }
 
     @Override
     public Stream<BinarySchema> getBinariesPerVersion(String version) {
         return binaries.parallelStream().filter(
                 x-> x.getReleaseInfo().getVersionSchema().isMatch(version)
+        );
+    }
+
+    @Override
+    public Stream<BinarySchema> getBinariesPerMajorVersion(String majorVersion) {
+        return binaries.stream().filter(x-> majorVersion
+                .equalsIgnoreCase(
+                        x.getReleaseInfo().getVersionSchema().getMajor()
+                )
         );
     }
 
