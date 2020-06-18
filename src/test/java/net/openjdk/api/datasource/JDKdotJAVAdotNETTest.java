@@ -21,7 +21,8 @@ public class JDKdotJAVAdotNETTest {
     public void testParser() {
         // JDK 9 (GA, 9.0.1) releases were available only for 1 operating system
         // which means the release included only 1 binary instead of 3
-        assert (api.getListOfAvailableVersions().count()*3)-4 == api.getListOfBinaries().count();
+        assert (api.getListOfAvailableVersions().count()*3)-4 == api.getBinariesBy(
+                "", "", "").count();
     }
 
     @Test

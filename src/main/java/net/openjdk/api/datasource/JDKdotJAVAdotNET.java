@@ -169,18 +169,13 @@ public class JDKdotJAVAdotNET implements DataSourceInterface {
     }
 
     @Override
-    public Stream<InfoSchema> getListOfReleases() {
-        return infos.stream();
+    public Stream<InfoSchema> getListOfReleasesBy(String version, String os_family, String os_arch) {
+        return DataCommons.getListOfReleasesBy(version, os_family, os_arch, infos.stream());
     }
 
     @Override
-    public Stream<BinarySchema> getListOfBinaries() {
-        return binaries.stream();
-    }
-
-    @Override
-    public Stream<BinarySchema> getBinaryBy(String version, String os_family, String os_arch) {
-        return DataCommons.getBinaryBy(version, os_family, os_arch, binaries.stream());
+    public Stream<BinarySchema> getBinariesBy(String version, String os_family, String os_arch) {
+        return DataCommons.getBinariesBy(version, os_family, os_arch, binaries.stream());
     }
 
     @Override

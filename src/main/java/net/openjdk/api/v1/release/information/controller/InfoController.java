@@ -10,14 +10,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import net.openjdk.api.v1.release.information.models.OpenAPI_InfoSchema;
 import net.openjdk.api.v1.release.information.service.InfoAPI;
-import net.openjdk.api.v1.release.information.models.InfoSchema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/release")
@@ -39,8 +35,12 @@ public class InfoController {
             method = RequestMethod.GET
     )
     @ResponseStatus(HttpStatus.OK)
-    public ObjectNode info() {
-        return serviceAPI.toJSON();
+    public ObjectNode info(
+            @RequestParam(name = "version", required = false, defaultValue = "") String version,
+            @RequestParam(name = "os_family", required = false, defaultValue = "") String os_family,
+            @RequestParam(name = "os_arch", required = false, defaultValue = "") String os_arch
+    ) {
+        return serviceAPI.getListOfReleasesBy(version, os_family, os_arch);
     }
 
 }

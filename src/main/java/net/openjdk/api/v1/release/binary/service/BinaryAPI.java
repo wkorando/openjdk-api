@@ -27,7 +27,7 @@ public class BinaryAPI {
             String os_arch
     ) {
         return JSONUtil.listOfObjectsToJson(
-                OpenAPI_BinarySchema.key, dataSource.getBinaryBy(version, os_family, os_arch)
+                OpenAPI_BinarySchema.key, dataSource.getBinariesBy(version, os_family, os_arch)
         );
     }
 

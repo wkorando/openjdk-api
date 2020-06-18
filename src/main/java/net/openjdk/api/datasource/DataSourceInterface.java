@@ -14,11 +14,9 @@ public interface DataSourceInterface {
 
     Stream<OSSchema> getListOfSupportedOperationSystems();
 
-    Stream<InfoSchema> getListOfReleases();
+    Stream<InfoSchema> getListOfReleasesBy(String version, String os_family, String os_arch);
 
-    Stream<BinarySchema> getListOfBinaries();
-
-    Stream<BinarySchema> getBinaryBy(String version, String os_family, String os_arch);
+    Stream<BinarySchema> getBinariesBy(String version, String os_family, String os_arch);
 
     BinarySchema getBinaryURL(String version, String os_family, String os_arch);
 
