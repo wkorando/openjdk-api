@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import net.openjdk.api.v1.release.operating_systems.models.OpenAPI_OSSchema;
 import net.openjdk.api.v1.release.versions.models.VersionSchema;
 import net.openjdk.api.v1.release.versions.service.VersionsAPI;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class VersionsController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found OpenJDK versions",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = VersionSchema.class)) })
+                            schema = @Schema(implementation = OpenAPI_OSSchema.class)) })
     })
     @RequestMapping(
             value = "/versions",

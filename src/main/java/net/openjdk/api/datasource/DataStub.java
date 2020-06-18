@@ -6,17 +6,15 @@ import net.openjdk.api.v1.release.operating_systems.models.OSSchema;
 import net.openjdk.api.v1.release.versions.models.VersionSchema;
 import net.openjdk.api.v1.release.versions.models.VersionTypeSchema;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 import java.util.stream.Stream;
 
 
-public class DataStub implements DataSourceInterface{
+public class DataStub extends DataCommons implements DataSourceInterface {
 
     final static VersionSchema v14 = new VersionSchema("14", "0", "1",
             "0", VersionTypeSchema.GA());
-    final static Stream<VersionSchema> versions = Stream.of(v14);
+    final static List<VersionSchema> versions = Collections.singletonList(v14);
 
     final static OSSchema lin = new OSSchema("x64", "linux");
     final static OSSchema macOs = new OSSchema("x64", "macos");
@@ -26,36 +24,40 @@ public class DataStub implements DataSourceInterface{
     final static InfoSchema macOsX64 = new InfoSchema(macOs, v14);
     final static InfoSchema winX64 = new InfoSchema(win, v14);
 
+    protected List<InfoSchema> infos = Arrays.asList(winX64, macOsX64, linX64);
+    protected Set<OSSchema> schemas = new HashSet<>(Arrays.asList(win, lin, macOs));
+
     final static List<BinarySchema> binaries = Arrays.asList(
             new BinarySchema(DataStub.linX64,
                     "https://download.java.net/java/GA/jdk14.0.1/664493ef4a6946b186ff29eb326336a2/7/GPL/openjdk-14.0.1_linux-x64_bin.tar.gz"
-    ),
+            ),
             new BinarySchema(DataStub.macOsX64,
                 "https://download.java.net/java/GA/jdk14.0.1/664493ef4a6946b186ff29eb326336a2/7/GPL/openjdk-14.0.1_osx-x64_bin.tar.gz"
-    ),
+            ),
             new BinarySchema(DataStub.winX64,
                 "https://download.java.net/java/GA/jdk14.0.1/664493ef4a6946b186ff29eb326336a2/7/GPL/openjdk-14.0.1_windows-x64_bin.zip"
-    )
-        );
+            )
+    );
+
 
     @Override
     public Stream<VersionSchema> getListOfAvailableVersions() {
-        return versions;
+        return versions.stream();
     }
 
     @Override
     public Stream<VersionSchema> getListOfAvailableVersionsFilteredByMajor(String openJDKmajorVersion) {
-        return versions.filter(x-> openJDKmajorVersion.equalsIgnoreCase(x.getMajor()));
+        return versions.stream().filter(x-> openJDKmajorVersion.equalsIgnoreCase(x.getMajor()));
     }
 
     @Override
     public Stream<OSSchema> getListOfSupportedOperationSystems() {
-        return Stream.of(win, lin, macOs);
+        return schemas.stream();
     }
 
     @Override
     public Stream<InfoSchema> getListOfReleases() {
-        return Stream.of(linX64, macOsX64, winX64);
+        return infos.stream();
     }
 
     @Override
@@ -64,45 +66,13 @@ public class DataStub implements DataSourceInterface{
     }
 
     @Override
-    public Stream<BinarySchema> getBinariesPerVersion(String version) {
-        return binaries.parallelStream().filter(
-                x-> x.getReleaseInfo().getVersionSchema().isMatch(version)
-        );
+    public Stream<BinarySchema> getBinaryBy(String version, String os_family, String os_arch) {
+        return DataCommons.getBinaryBy(version, os_family, os_arch, binaries.stream());
     }
 
     @Override
-    public Stream<BinarySchema> getBinariesPerMajorVersion(String majorVersion) {
-        return binaries.stream().filter(x-> majorVersion
-                .equalsIgnoreCase(
-                        x.getReleaseInfo().getVersionSchema().getMajor()
-                )
-        );
-    }
-
-    @Override
-    public Stream<BinarySchema> getBinariesPerVersionAndOS(String version, String os_family) {
-        return binaries.parallelStream().filter(
-                x->{
-                    var rel = x.getReleaseInfo();
-                    return rel.getOSSchema().isMatch(os_family) &&
-                            rel.getVersionSchema().isMatch(version);
-                }
-        );
-    }
-
-    @Override
-    public BinarySchema getBinary(String version, String os_family, String os_arch) {
-        var res = binaries.parallelStream().filter(
-                x->{
-                    var rel = x.getReleaseInfo();
-                    return rel.getOSSchema().isMatch(os_family) &&
-                            rel.getVersionSchema().isMatch(version);
-                }
-        ).collect(Collectors.toList());
-        if (res.size() > 0) {
-            return res.get(0);
-        }
-        return null;
+    public BinarySchema getBinaryURL(String version, String os_family, String os_arch) {
+        return DataCommons.getBinaryURL(version, os_family, os_arch, binaries.stream());
     }
 
 }

@@ -20,9 +20,17 @@ public class OSSchema {
         return String.format("%s/%s", os_family, os_arch);
     }
 
+    public Boolean isMatchByOSFamily(String os_family) {
+        return this.os_family.equalsIgnoreCase(os_family);
+    }
+
+    public Boolean isMatchByOSArch(String os_arch) {
+        return this.os_arch.equalsIgnoreCase(os_arch);
+    }
+
     public Boolean isMatch(String os_family, String os_arch) {
-        return this.os_family.equalsIgnoreCase(os_family) &&
-                this.os_arch.equalsIgnoreCase(os_arch);
+        return isMatchByOSFamily(os_family) &&
+                isMatchByOSArch(os_arch);
     }
 
     public Boolean isMatch(String os_family) {

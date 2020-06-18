@@ -8,8 +8,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import net.openjdk.api.v1.release.binary.model.BinarySchema;
+import net.openjdk.api.v1.release.binary.model.OpenAPI_BinarySchema;
 import net.openjdk.api.v1.release.binary.service.BinaryAPI;
-import net.openjdk.api.v1.release.information.models.InfoSchema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
+import java.util.Optional;
 
 
 @RestController
@@ -32,7 +34,7 @@ public class BinaryController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found OpenJDK release binaries",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = InfoSchema.class)) })
+                            schema = @Schema(implementation = OpenAPI_BinarySchema.class)) })
     })
     @RequestMapping(
             value = "/binaries",
@@ -40,8 +42,13 @@ public class BinaryController {
             method = RequestMethod.GET
     )
     @ResponseStatus(HttpStatus.OK)
-    public ObjectNode binaries() {
-        return binaryAPI.toJSON();
+    public ObjectNode binaries(
+            @RequestParam(name = "version", required = false, defaultValue = "") String version,
+            @RequestParam(name = "os_family", required = false, defaultValue = "") String os_family,
+            @RequestParam(name = "os_arch", required = false, defaultValue = "") String os_arch
+    ) {
+        return binaryAPI.getBinariesFilteredBy(
+                version, os_family, os_arch);
     }
 
     @Operation(summary = "Get the particular binary URL via HTTP 307")

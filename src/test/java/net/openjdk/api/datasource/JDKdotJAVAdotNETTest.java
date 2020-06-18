@@ -32,7 +32,7 @@ public class JDKdotJAVAdotNETTest {
 
     @Test
     public void testValidBinaryURL() throws Exception {
-        var binary = api.getBinary("9.0.0+181", "linux", "x64");
+        var binary = api.getBinaryURL("9.0.0+181", "linux", "x64");
         new URL(binary.getBinaryLink()).toURI();
     }
 

@@ -19,9 +19,8 @@ public interface DataSourceInterface {
 
     Stream<BinarySchema> getListOfBinaries();
 
-    Stream<BinarySchema> getBinariesPerVersion(String version);
-    Stream<BinarySchema> getBinariesPerMajorVersion(String majorVersion);
-    Stream<BinarySchema> getBinariesPerVersionAndOS(String version, String os_family);
-    BinarySchema getBinary(String version, String os_family, String os_arch);
+    Stream<BinarySchema> getBinaryBy(String version, String os_family, String os_arch);
+
+    BinarySchema getBinaryURL(String version, String os_family, String os_arch);
 
 }

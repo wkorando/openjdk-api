@@ -47,7 +47,8 @@ public class VersionSchema {
     }
 
     public Boolean isMatch(String version) {
-        return getVersion().equalsIgnoreCase(version);
+        return getVersion().startsWith(version);
+//        return getVersion().equalsIgnoreCase(version);
     }
 
     public String toString() {

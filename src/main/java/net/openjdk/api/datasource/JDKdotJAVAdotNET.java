@@ -184,44 +184,13 @@ public class JDKdotJAVAdotNET implements DataSourceInterface {
     }
 
     @Override
-    public Stream<BinarySchema> getBinariesPerVersion(String version) {
-        return binaries.parallelStream().filter(
-                x-> x.getReleaseInfo().getVersionSchema().isMatch(version)
-        );
+    public Stream<BinarySchema> getBinaryBy(String version, String os_family, String os_arch) {
+        return DataCommons.getBinaryBy(version, os_family, os_arch, binaries.stream());
     }
 
     @Override
-    public Stream<BinarySchema> getBinariesPerMajorVersion(String majorVersion) {
-        return binaries.stream().filter(x-> majorVersion
-                .equalsIgnoreCase(
-                        x.getReleaseInfo().getVersionSchema().getMajor()
-                )
-        );
+    public BinarySchema getBinaryURL(String version, String os_family, String os_arch) {
+        return DataCommons.getBinaryURL(version, os_family, os_arch, binaries.stream());
     }
 
-    @Override
-    public Stream<BinarySchema> getBinariesPerVersionAndOS(String version, String os_family) {
-        return binaries.parallelStream().filter(
-                x->{
-                    var rel = x.getReleaseInfo();
-                    return rel.getOSSchema().isMatch(os_family) &&
-                            rel.getVersionSchema().isMatch(version);
-                }
-        );
-    }
-
-    @Override
-    public BinarySchema getBinary(String version, String os_family, String os_arch) {
-        var res = binaries.parallelStream().filter(
-                x->{
-                    var rel = x.getReleaseInfo();
-                    return rel.getOSSchema().isMatch(os_family) &&
-                            rel.getVersionSchema().isMatch(version);
-                }
-        ).collect(Collectors.toList());
-        if (res.size() > 0) {
-            return res.get(0);
-        }
-        return null;
-    }
 }

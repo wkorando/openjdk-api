@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import net.openjdk.api.v1.release.information.models.OpenAPI_InfoSchema;
 import net.openjdk.api.v1.release.information.service.InfoAPI;
 import net.openjdk.api.v1.release.information.models.InfoSchema;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class InfoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found OpenJDK releases",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = InfoSchema.class)) })
+                            schema = @Schema(implementation = OpenAPI_InfoSchema.class)) })
     })
     @RequestMapping(
             value = "/information",

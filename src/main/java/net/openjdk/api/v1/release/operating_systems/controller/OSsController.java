@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import net.openjdk.api.v1.release.operating_systems.models.OSSchema;
+import net.openjdk.api.v1.release.operating_systems.models.OpenAPI_OSSchema;
 import net.openjdk.api.v1.release.operating_systems.service.OSAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class OSsController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found operating systems",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = OSSchema.class)) })
+                            schema = @Schema(implementation = OpenAPI_OSSchema.class)) })
     })
     @RequestMapping(
             value = "/operating_systems",
