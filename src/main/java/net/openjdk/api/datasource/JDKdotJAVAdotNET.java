@@ -164,11 +164,6 @@ public class JDKdotJAVAdotNET implements DataSourceInterface {
     }
 
     @Override
-    public Stream<VersionSchema> getListOfAvailableVersionsFilteredByMajor(String openJDKmajorVersion) {
-        return versions.stream().filter(x-> openJDKmajorVersion.equalsIgnoreCase(x.getMajor()));
-    }
-
-    @Override
     public Stream<OSSchema> getListOfSupportedOperationSystems() {
         return schemas.stream();
     }

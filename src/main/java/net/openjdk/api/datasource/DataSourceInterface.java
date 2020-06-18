@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 public interface DataSourceInterface {
 
     Stream<VersionSchema> getListOfAvailableVersions();
-    Stream<VersionSchema> getListOfAvailableVersionsFilteredByMajor(String openJDKmajorVersion);
 
     Stream<OSSchema> getListOfSupportedOperationSystems();
 
