@@ -1,5 +1,6 @@
 package net.openjdk.api.util;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -9,7 +10,8 @@ import java.util.stream.Stream;
 
 public class JSONUtil {
 
-    protected static final ObjectMapper mapper = new ObjectMapper();
+    protected static final ObjectMapper mapper = new ObjectMapper()
+            .setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
     public static ObjectNode listOfObjectsToJson(String key, Stream<?> items) {
         var node = mapper.createObjectNode();

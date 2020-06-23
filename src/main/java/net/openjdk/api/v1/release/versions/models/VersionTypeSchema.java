@@ -5,11 +5,15 @@ import java.util.List;
 
 public class VersionTypeSchema {
 
-    protected static final String GA = "ga";
-    protected static final String EA = "ea";
+    // OpenJDK general availability
+    protected static final String GA = "jdk-ga";
+    // OpenJDK early access
+    protected static final String EA = "jdk-ea";
+    // OpenJDK project early access
+    protected static final String PEA = "jdk-project-pea";
 
     public static List<String> getTypes() {
-        return Arrays.asList(GA, EA);
+        return Arrays.asList(GA, EA, PEA);
     }
 
     public static String GA() {
@@ -18,6 +22,10 @@ public class VersionTypeSchema {
 
     public static String EA() {
         return EA;
+    }
+
+    public static String ProjectEA() {
+        return PEA;
     }
 
 }

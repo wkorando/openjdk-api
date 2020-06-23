@@ -2,29 +2,27 @@ package net.openjdk.api.v1.release.versions.models;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.validation.constraints.NotBlank;
 
 public class VersionSchema {
 
-    @NotBlank
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonProperty("build_number")
     private final String buildNumber;
 
-    @NotBlank
     @JsonProperty("major")
     private final String major;
 
-    @NotBlank
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonProperty("minor")
     private final String minor;
 
-    @NotBlank
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonProperty("security")
     private final String security;
 
-    @NotBlank
     @JsonProperty("type")
     private final String versionType;
 
@@ -38,7 +36,23 @@ public class VersionSchema {
 
     @JsonGetter("version")
     public String getVersion() {
-        return String.format("%s.%s.%s+%s", major, minor, security, buildNumber);
+        if (versionType.equalsIgnoreCase(VersionTypeSchema.EA()) ||
+                versionType.equalsIgnoreCase(VersionTypeSchema.ProjectEA())) {
+            return String.format("%s+%s", major, buildNumber);
+        }
+
+        // what if build number is not present?
+        // what if minor and security is not present?
+        var fmt = "%s.%s.%s";
+        if (!buildNumber.isEmpty()) {
+            fmt += "+%s";
+        }
+        return String.format(fmt, major, minor, security, buildNumber);
+    }
+
+    @JsonIgnore
+    public String getVersionType() {
+        return versionType;
     }
 
     @JsonIgnore
@@ -48,7 +62,6 @@ public class VersionSchema {
 
     public Boolean isMatch(String version) {
         return getVersion().startsWith(version);
-//        return getVersion().equalsIgnoreCase(version);
     }
 
     public String toString() {

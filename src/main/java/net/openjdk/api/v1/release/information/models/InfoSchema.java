@@ -33,7 +33,7 @@ public class InfoSchema {
     }
 
     public String toString() {
-        return String.format("%s %s", version.toString(), os.toString());
+        return String.format("%s for %s", version.toString(), os.toString());
     }
 
 }

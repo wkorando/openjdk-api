@@ -28,15 +28,6 @@ public class OSSchema {
         return this.os_arch.equalsIgnoreCase(os_arch);
     }
 
-    public Boolean isMatch(String os_family, String os_arch) {
-        return isMatchByOSFamily(os_family) &&
-                isMatchByOSArch(os_arch);
-    }
-
-    public Boolean isMatch(String os_family) {
-        return this.os_family.equalsIgnoreCase(os_family);
-    }
-
     public String toString() {
         return getAlias();
     }
