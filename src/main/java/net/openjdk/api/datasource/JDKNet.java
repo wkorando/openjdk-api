@@ -13,6 +13,7 @@ import org.jsoup.nodes.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.*;
@@ -38,6 +39,9 @@ public class JDKNet implements DataSourceInterface {
         readData();
     }
 
+    @Value("${application.datasource.implementation.jdk_net.include_project_ea_builds}")
+    private boolean includeProjectEABuilds;
+
     public void readData() {
         try {
             var newBinaries = Collections.synchronizedList(new ArrayList<BinarySchema>());
@@ -60,8 +64,10 @@ public class JDKNet implements DataSourceInterface {
                         parseJDKVersionOSBinary(x.attributes().get("href"), VersionTypeSchema.EA(),
                                 newVersions, newBinaries, newSchemas, newReleases);
                     } else {
-                        parseJDKVersionOSBinary(x.attributes().get("href"), VersionTypeSchema.ProjectEA(),
-                                newVersions, newBinaries, newSchemas, newReleases);
+                        if (includeProjectEABuilds) {
+                            parseJDKVersionOSBinary(x.attributes().get("href"), VersionTypeSchema.ProjectEA(),
+                                    newVersions, newBinaries, newSchemas, newReleases);
+                        }
                     }
                 } catch (Exception e) {
                     logger.warn("Unable to read OpenJDK EA OpenJDK project EA builds and from jdk.java.net", e);
