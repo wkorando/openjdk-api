@@ -5,9 +5,15 @@ import net.openjdk.api.v1.release.information.models.InfoSchema;
 import net.openjdk.api.v1.release.operating_systems.models.OSSchema;
 import net.openjdk.api.v1.release.versions.models.VersionSchema;
 import net.openjdk.api.v1.release.versions.models.VersionTypeSchema;
+
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -15,39 +21,65 @@ import java.util.stream.Stream;
 
 public class JDKNet implements DataSourceInterface {
 
+    protected Logger logger = LoggerFactory.getLogger(JDKNet.class);
+
     protected final String jdkWebURL = "https://jdk.java.net";
     protected final HTMLtoXMLRoutine parser = new HTMLtoXMLRoutine();
 
-    protected List<BinarySchema> binaries = new ArrayList<>();
-    protected List<InfoSchema> infos = new ArrayList<>();
-    protected List<VersionSchema> versions = new ArrayList<>();
-    protected Set<OSSchema> schemas = new HashSet<>();
+    protected List<BinarySchema> binaries = Collections.synchronizedList(new ArrayList<>());
+    protected List<InfoSchema> releases = Collections.synchronizedList(new ArrayList<>());
+    protected List<VersionSchema> versions = Collections.synchronizedList(new ArrayList<>());
+    protected Set<OSSchema> schemas = Collections.synchronizedSet(new HashSet<>());
 
-    // parse `jdkWebURL` page
-    // find GA and EA build references and URLs
-    // parse each page
-    // get binaries per OS and OS arch
+    // run once in an hour
+    @Scheduled(cron = "${application.datasource.scheduled_update_cron_value: 0 0 */1 * * *}")
+    private void scheduledTask() {
+        logger.info("running JDKNet.scheduledTask");
+        readData();
+    }
 
-    public JDKNet() throws Exception {
-        var doc = parser.parseXMLtoDocument(jdkWebURL);
-        getListOfGABuilds(doc).forEach(x->{
-            try {
-                parseJDKVersionOSBinary(x, VersionTypeSchema.GA());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        getListOfEABuilds(doc).forEach(x->{
-            try {
-                if (((Element) x).text().startsWith("JDK")) {
-                    parseJDKVersionOSBinary(x.attributes().get("href"), VersionTypeSchema.EA());
-                } else {
-                    parseJDKVersionOSBinary(x.attributes().get("href"), VersionTypeSchema.ProjectEA());
+    public void readData() {
+        try {
+            var newBinaries = Collections.synchronizedList(new ArrayList<BinarySchema>());
+            var newReleases = Collections.synchronizedList(new ArrayList<InfoSchema>());
+            var newVersions = Collections.synchronizedList(new ArrayList<VersionSchema>());
+            var newSchemas = Collections.synchronizedSet(new HashSet<OSSchema>());
+
+            var doc = parser.parseXMLtoDocument(jdkWebURL);
+            getListOfGABuilds(doc).forEach(x->{
+                try {
+                    parseJDKVersionOSBinary(x, VersionTypeSchema.GA(),
+                            newVersions, newBinaries, newSchemas, newReleases);
+                } catch (Exception e) {
+                    logger.warn("Unable to read OpenJDK GA builds and from jdk.java.net", e);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+            });
+            getListOfEABuilds(doc).forEach(x->{
+                try {
+                    if (((Element) x).text().startsWith("JDK")) {
+                        parseJDKVersionOSBinary(x.attributes().get("href"), VersionTypeSchema.EA(),
+                                newVersions, newBinaries, newSchemas, newReleases);
+                    } else {
+                        parseJDKVersionOSBinary(x.attributes().get("href"), VersionTypeSchema.ProjectEA(),
+                                newVersions, newBinaries, newSchemas, newReleases);
+                    }
+                } catch (Exception e) {
+                    logger.warn("Unable to read OpenJDK EA OpenJDK project EA builds and from jdk.java.net", e);
+                }
+            });
+
+            versions = newVersions;
+            schemas = newSchemas;
+            binaries = newBinaries;
+            releases = newReleases;
+
+        } catch (Exception e) {
+            logger.warn("unable to read from jdk.java.net!", e);
+        }
+    }
+
+    public JDKNet() {
+        readData();
     }
 
     private List<String> getListOfGABuilds(Document doc) {
@@ -76,7 +108,13 @@ public class JDKNet implements DataSourceInterface {
         return eaURLList;
     }
 
-    private void parseJDKVersionOSBinary(String versionMajor, String buildType) throws Exception {
+    private void parseJDKVersionOSBinary(
+            String versionMajor, String buildType,
+            List<VersionSchema> newVersions,
+            List<BinarySchema> newBinaries,
+            Set<OSSchema> newSchemas,
+            List<InfoSchema> newReleases
+    ) throws Exception {
         var version = versionMajor.replaceAll("/", "");
         var doc = parser.parseXMLtoDocument(String.format("%s%s", jdkWebURL, versionMajor));
         var realBuildNumber = "";
@@ -128,20 +166,25 @@ public class JDKNet implements DataSourceInterface {
         }
 
         var v = new VersionSchema(version, minor, security, realBuildNumber, buildType);
-        readEABuildsFromPage(v, doc);
-        versions.add(v);
+        readEABuildsFromPage(v, doc, newBinaries, newSchemas, newReleases);
+        newVersions.add(v);
     }
 
-    private void readEABuildsFromPage(VersionSchema version, Document doc) {
+    private void readEABuildsFromPage(
+            VersionSchema version, Document doc,
+            List<BinarySchema> newBinaries,
+            Set<OSSchema> newSchemas,
+            List<InfoSchema> newReleases
+    ) {
         var tableContent = doc.select("table").select("tr");
-        tableContent.forEach(x->{
+        tableContent.forEach(x -> {
             var osParts = x.select("th").get(0).childNode(0).toString().toLowerCase().split("/");
             var osSchema = new OSSchema(osParts[1].strip(), osParts[0].strip());
-            schemas.add(osSchema);
+            newSchemas.add(osSchema);
             var release = new InfoSchema(osSchema, version);
-            infos.add(release);
+            newReleases.add(release);
             var binary = new BinarySchema(release, x.select("td").get(0).childNode(0).attributes().get("href"));
-            binaries.add(binary);
+            newBinaries.add(binary);
         });
     }
 
@@ -158,7 +201,7 @@ public class JDKNet implements DataSourceInterface {
 
     @Override
     public Stream<InfoSchema> getListOfReleasesBy(String version, String os_family, String os_arch) {
-        return DataCommons.getListOfReleasesBy(version, os_family, os_arch, infos.stream());
+        return DataCommons.getListOfReleasesBy(version, os_family, os_arch, releases.stream());
     }
 
     @Override

@@ -2,8 +2,6 @@ package net.openjdk.api.datasource;
 
 import net.openjdk.api.v1.release.binary.model.BinarySchema;
 import net.openjdk.api.v1.release.information.models.InfoSchema;
-import net.openjdk.api.v1.release.operating_systems.models.OSSchema;
-import net.openjdk.api.v1.release.versions.models.VersionSchema;
 
 import java.util.stream.Stream;
 
@@ -34,14 +32,6 @@ class DataCommons {
             var osSchema = rel.getOSSchema();
             return !os_arch.isEmpty() ? osSchema.isMatchByOSArch(os_arch): true;
         });
-
-//        return binaries.filter(
-//                x->{
-//                    var rel = x.getReleaseInfo();
-//                    var osSchema = rel.getOSSchema();
-//                    return filteringRule(rel.getVersionSchema(), osSchema, version, os_family, os_arch);
-//                }
-//        );
     }
 
     public static BinarySchema getBinaryURL(String version, String os_family, String os_arch, Stream<BinarySchema> binaries) {
