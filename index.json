@@ -1,0 +1,621 @@
+[ {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "aarch64",
+      "alias" : "linux/aarch64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/jdk17/16/GPL/openjdk-17-ea+16_linux-aarch64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/jdk17/16/GPL/openjdk-17-ea+16_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/jdk17/16/GPL/openjdk-17-ea+16_osx-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/jdk17/16/GPL/openjdk-17-ea+16_windows-x64_bin.zip"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "alpine linux",
+      "os_arch" : "x64",
+      "alias" : "alpine linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/alpine/14/binaries/openjdk-17-ea+14_linux-x64-musl_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "6-225",
+      "major" : "17",
+      "minor" : "loom",
+      "type" : "jdk-project-pea",
+      "version" : "17+6-225"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/loom/6/openjdk-17-loom+6-225_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "build_number" : "6-225",
+      "major" : "17",
+      "minor" : "loom",
+      "type" : "jdk-project-pea",
+      "version" : "17+6-225"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/loom/6/openjdk-17-loom+6-225_osx-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "build_number" : "6-225",
+      "major" : "17",
+      "minor" : "loom",
+      "type" : "jdk-project-pea",
+      "version" : "17+6-225"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/loom/6/openjdk-17-loom+6-225_windows-x64_bin.zip"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "2-51",
+      "major" : "17",
+      "minor" : "panama",
+      "type" : "jdk-project-pea",
+      "version" : "17+2-51"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/panama/2/openjdk-17-panama+2-51_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "build_number" : "2-51",
+      "major" : "17",
+      "minor" : "panama",
+      "type" : "jdk-project-pea",
+      "version" : "17+2-51"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/panama/2/openjdk-17-panama+2-51_osx-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "build_number" : "2-51",
+      "major" : "17",
+      "minor" : "panama",
+      "type" : "jdk-project-pea",
+      "version" : "17+2-51"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/panama/2/openjdk-17-panama+2-51_windows-x64_bin.zip"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "aarch64",
+      "alias" : "linux/aarch64"
+    },
+    "version_info" : {
+      "major" : "15",
+      "minor" : "0",
+      "security" : "2",
+      "type" : "jdk-ga",
+      "version" : "15.0.2"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk15.0.2/0d1cfde4252546c6931946de8db48ee2/7/GPL/openjdk-15.0.2_linux-aarch64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "major" : "15",
+      "minor" : "0",
+      "security" : "2",
+      "type" : "jdk-ga",
+      "version" : "15.0.2"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk15.0.2/0d1cfde4252546c6931946de8db48ee2/7/GPL/openjdk-15.0.2_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "major" : "15",
+      "minor" : "0",
+      "security" : "2",
+      "type" : "jdk-ga",
+      "version" : "15.0.2"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk15.0.2/0d1cfde4252546c6931946de8db48ee2/7/GPL/openjdk-15.0.2_osx-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "major" : "15",
+      "minor" : "0",
+      "security" : "2",
+      "type" : "jdk-ga",
+      "version" : "15.0.2"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk15.0.2/0d1cfde4252546c6931946de8db48ee2/7/GPL/openjdk-15.0.2_windows-x64_bin.zip"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "1-1",
+      "major" : "15",
+      "minor" : "metropolis",
+      "type" : "jdk-project-pea",
+      "version" : "15+1-1"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/metropolis/1/openjdk-15-metropolis+1-1_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "4-55",
+      "major" : "14",
+      "minor" : "valhalla",
+      "type" : "jdk-project-pea",
+      "version" : "14+4-55"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/valhalla/4/openjdk-14-valhalla+4-55_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "build_number" : "4-55",
+      "major" : "14",
+      "minor" : "valhalla",
+      "type" : "jdk-project-pea",
+      "version" : "14+4-55"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/valhalla/4/openjdk-14-valhalla+4-55_osx-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "build_number" : "4-55",
+      "major" : "14",
+      "minor" : "valhalla",
+      "type" : "jdk-project-pea",
+      "version" : "14+4-55"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/valhalla/4/openjdk-14-valhalla+4-55_windows-x64_bin.zip"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "major" : "lanai",
+      "type" : "jdk-project-pea",
+      "version" : "lanai+"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/lanai/3/openjdk-17-lanai+3-133_osx-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "aarch64",
+      "alias" : "linux/aarch64"
+    },
+    "version_info" : {
+      "major" : "15",
+      "minor" : "0",
+      "security" : "2",
+      "type" : "jdk-ga",
+      "version" : "15.0.2"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk15.0.2/0d1cfde4252546c6931946de8db48ee2/7/GPL/openjdk-15.0.2_linux-aarch64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "major" : "15",
+      "minor" : "0",
+      "security" : "2",
+      "type" : "jdk-ga",
+      "version" : "15.0.2"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk15.0.2/0d1cfde4252546c6931946de8db48ee2/7/GPL/openjdk-15.0.2_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "major" : "15",
+      "minor" : "0",
+      "security" : "2",
+      "type" : "jdk-ga",
+      "version" : "15.0.2"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk15.0.2/0d1cfde4252546c6931946de8db48ee2/7/GPL/openjdk-15.0.2_osx-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "major" : "15",
+      "minor" : "0",
+      "security" : "2",
+      "type" : "jdk-ga",
+      "version" : "15.0.2"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk15.0.2/0d1cfde4252546c6931946de8db48ee2/7/GPL/openjdk-15.0.2_windows-x64_bin.zip"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "1-1",
+      "major" : "15",
+      "minor" : "metropolis",
+      "type" : "jdk-project-pea",
+      "version" : "15+1-1"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/metropolis/1/openjdk-15-metropolis+1-1_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "aarch64",
+      "alias" : "linux/aarch64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/jdk17/16/GPL/openjdk-17-ea+16_linux-aarch64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/jdk17/16/GPL/openjdk-17-ea+16_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/jdk17/16/GPL/openjdk-17-ea+16_osx-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/jdk17/16/GPL/openjdk-17-ea+16_windows-x64_bin.zip"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "alpine linux",
+      "os_arch" : "x64",
+      "alias" : "alpine linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/alpine/14/binaries/openjdk-17-ea+14_linux-x64-musl_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "6-225",
+      "major" : "17",
+      "minor" : "loom",
+      "type" : "jdk-project-pea",
+      "version" : "17+6-225"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/loom/6/openjdk-17-loom+6-225_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "build_number" : "6-225",
+      "major" : "17",
+      "minor" : "loom",
+      "type" : "jdk-project-pea",
+      "version" : "17+6-225"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/loom/6/openjdk-17-loom+6-225_osx-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "build_number" : "6-225",
+      "major" : "17",
+      "minor" : "loom",
+      "type" : "jdk-project-pea",
+      "version" : "17+6-225"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/loom/6/openjdk-17-loom+6-225_windows-x64_bin.zip"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "2-51",
+      "major" : "17",
+      "minor" : "panama",
+      "type" : "jdk-project-pea",
+      "version" : "17+2-51"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/panama/2/openjdk-17-panama+2-51_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "build_number" : "2-51",
+      "major" : "17",
+      "minor" : "panama",
+      "type" : "jdk-project-pea",
+      "version" : "17+2-51"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/panama/2/openjdk-17-panama+2-51_osx-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "build_number" : "2-51",
+      "major" : "17",
+      "minor" : "panama",
+      "type" : "jdk-project-pea",
+      "version" : "17+2-51"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/panama/2/openjdk-17-panama+2-51_windows-x64_bin.zip"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "aarch64",
+      "alias" : "linux/aarch64"
+    },
+    "version_info" : {
+      "major" : "16",
+      "type" : "jdk-ga",
+      "version" : "16.."
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk16/7863447f0ab643c585b9bdebf67c69db/36/GPL/openjdk-16_linux-aarch64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "major" : "16",
+      "type" : "jdk-ga",
+      "version" : "16.."
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk16/7863447f0ab643c585b9bdebf67c69db/36/GPL/openjdk-16_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "major" : "16",
+      "type" : "jdk-ga",
+      "version" : "16.."
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk16/7863447f0ab643c585b9bdebf67c69db/36/GPL/openjdk-16_osx-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "major" : "16",
+      "type" : "jdk-ga",
+      "version" : "16.."
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk16/7863447f0ab643c585b9bdebf67c69db/36/GPL/openjdk-16_windows-x64_bin.zip"
+} ]
