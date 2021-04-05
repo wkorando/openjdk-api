@@ -26,7 +26,6 @@ public class JDKNet implements DataSourceInterface {
 
     protected final String jdkWebURL = "https://jdk.java.net";
     protected final HTMLtoXMLRoutine parser = new HTMLtoXMLRoutine();
-
     protected List<BinarySchema> binaries = Collections.synchronizedList(new ArrayList<>());
     protected List<InfoSchema> releases = Collections.synchronizedList(new ArrayList<>());
     protected List<VersionSchema> versions = Collections.synchronizedList(new ArrayList<>());
@@ -85,6 +84,11 @@ public class JDKNet implements DataSourceInterface {
     }
 
     public JDKNet() {
+        readData();
+    }
+
+    public JDKNet(Boolean includeProjectEABuilds) {
+        this.includeProjectEABuilds = includeProjectEABuilds;
         readData();
     }
 
@@ -205,9 +209,17 @@ public class JDKNet implements DataSourceInterface {
         return schemas.stream();
     }
 
+    public Stream<InfoSchema> getListOfReleasesBy(String version) {
+        return DataCommons.getListOfReleasesBy(version, releases.stream());
+    }
+
     @Override
     public Stream<InfoSchema> getListOfReleasesBy(String version, String os_family, String os_arch) {
         return DataCommons.getListOfReleasesBy(version, os_family, os_arch, releases.stream());
+    }
+
+    public Stream<BinarySchema> getBinariesBy(String version) {
+        return DataCommons.getBinariesBy(version, binaries.stream());
     }
 
     @Override
@@ -218,6 +230,22 @@ public class JDKNet implements DataSourceInterface {
     @Override
     public BinarySchema getBinaryURL(String version, String os_family, String os_arch) {
         return DataCommons.getBinaryURL(version, os_family, os_arch, binaries.stream());
+    }
+
+    public List<InfoSchema> getListOfDetailedReleases() {
+        var res = new ArrayList<InfoSchema>();
+        getListOfAvailableVersions().toList().parallelStream().forEach(
+                v -> res.addAll(getListOfReleasesBy(v.getMajor()).toList())
+        );
+        return res;
+    }
+
+    public List<BinarySchema> getListOfDetailedReleaseBinaries() {
+        var res = new ArrayList<BinarySchema>();
+        getListOfAvailableVersions().toList().parallelStream().forEach(
+                v -> res.addAll(getBinariesBy(v.getMajor()).toList())
+        );
+        return res;
     }
 
 }

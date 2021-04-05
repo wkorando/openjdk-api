@@ -7,6 +7,10 @@ import java.util.stream.Stream;
 
 class DataCommons {
 
+    public static Stream<InfoSchema> getListOfReleasesBy(String version, Stream<InfoSchema> schemas) {
+        return schemas.filter(x -> !version.isEmpty() ? x.getVersionSchema().isMatch(version): true);
+    }
+
     public static Stream<InfoSchema> getListOfReleasesBy(String version, String os_family, String os_arch, Stream<InfoSchema> schemas) {
         return schemas.filter(x -> !version.isEmpty() ? x.getVersionSchema().isMatch(version): true)
                 .filter(x->{
@@ -16,6 +20,14 @@ class DataCommons {
                     var osSchema = x.getOSSchema();
                     return !os_arch.isEmpty() ? osSchema.isMatchByOSArch(os_arch): true;
                 });
+    }
+
+    public static Stream<BinarySchema> getBinariesBy(String version, Stream<BinarySchema> binaries) {
+        return binaries.filter(v->{
+            // filter by version
+            var rel = v.getReleaseInfo();
+            return !version.isEmpty() ? rel.getVersionSchema().isMatch(version): true;
+        });
     }
 
     public static Stream<BinarySchema> getBinariesBy(String version, String os_family, String os_arch, Stream<BinarySchema> binaries) {
