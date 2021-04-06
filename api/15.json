@@ -1,7 +1,6 @@
 [ {
   "release_info" : {
     "operating_system" : {
-      "underScoreAlias" : "linux_aarch64",
       "os_family" : "linux",
       "os_arch" : "aarch64",
       "alias" : "linux/aarch64"
@@ -18,7 +17,6 @@
 }, {
   "release_info" : {
     "operating_system" : {
-      "underScoreAlias" : "linux_x64",
       "os_family" : "linux",
       "os_arch" : "x64",
       "alias" : "linux/x64"
@@ -35,7 +33,6 @@
 }, {
   "release_info" : {
     "operating_system" : {
-      "underScoreAlias" : "macos_x64",
       "os_family" : "macos",
       "os_arch" : "x64",
       "alias" : "macos/x64"
@@ -52,7 +49,6 @@
 }, {
   "release_info" : {
     "operating_system" : {
-      "underScoreAlias" : "windows_x64",
       "os_family" : "windows",
       "os_arch" : "x64",
       "alias" : "windows/x64"
@@ -69,7 +65,6 @@
 }, {
   "release_info" : {
     "operating_system" : {
-      "underScoreAlias" : "linux_x64",
       "os_family" : "linux",
       "os_arch" : "x64",
       "alias" : "linux/x64"

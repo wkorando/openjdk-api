@@ -46,6 +46,7 @@ public class JDKNet implements DataSourceInterface {
     private boolean includeProjectEABuilds;
 
     public void readData() {
+        logger.info("starting jdk.java.net parser...");
         try {
             var newBinaries = Collections.synchronizedList(new ArrayList<BinarySchema>());
             var newReleases = Collections.synchronizedList(new ArrayList<InfoSchema>());
@@ -61,15 +62,18 @@ public class JDKNet implements DataSourceInterface {
                     logger.warn("Unable to read OpenJDK GA builds and from jdk.java.net", e);
                 }
             });
+            logger.info("GA builds parsed and populated");
             getListOfEABuilds(doc).forEach(x->{
                 try {
                     if (((Element) x).text().startsWith("JDK")) {
                         parseJDKVersionOSBinary(x.attributes().get("href"), VersionTypeSchema.EA(),
                                 newVersions, newBinaries, newSchemas, newReleases);
+                        logger.info("EA builds parsed and populated");
                     } else {
                         if (includeProjectEABuilds) {
                             parseJDKVersionOSBinary(x.attributes().get("href"), VersionTypeSchema.ProjectEA(),
                                     newVersions, newBinaries, newSchemas, newReleases);
+                            logger.info("OpenJDK project EA builds parsed and populated");
                         }
                     }
                 } catch (Exception e) {
@@ -253,12 +257,14 @@ public class JDKNet implements DataSourceInterface {
     }
 
     public void persistDetailedReleaseBinaries(String localStore) {
+        logger.info("re-indexing process initialized");
         var mapper = new ObjectMapper().writerWithDefaultPrettyPrinter();
         getListOfAvailableVersions().forEach(version -> {
-
+            logger.info("OpenJDK versions retrieved");
             var versionJsonPath = Path.of(localStore + "/" + version.getMajor() + ".json");
             var allBins = getBinariesBy(version.getMajor()).toList();
             try {
+                logger.info("mapping per-major-version releases into the filesystem");
                 mapper.writeValue(versionJsonPath.toFile(), allBins);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -279,6 +285,8 @@ public class JDKNet implements DataSourceInterface {
                             major, os.getUnderScoreAlias(),
                             version.getVersionID(), version.getVersion()
                     );
+                    logger.info(String.format(
+                            "mapping %s releases into the filesystem", fmtJson));
                     mapper.writeValue(Path.of(fmtJson).toFile(), binaryRelease);
 
                 } catch (IOException e) {

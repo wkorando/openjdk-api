@@ -1,7 +1,6 @@
 {
   "release_info" : {
     "operating_system" : {
-      "underScoreAlias" : "macos_x64",
       "os_family" : "macos",
       "os_arch" : "x64",
       "alias" : "macos/x64"

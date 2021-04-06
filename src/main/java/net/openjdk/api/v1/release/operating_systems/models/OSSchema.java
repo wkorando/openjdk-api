@@ -1,5 +1,6 @@
 package net.openjdk.api.v1.release.operating_systems.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -20,6 +21,7 @@ public class OSSchema {
         return String.format("%s/%s", os_family, os_arch);
     }
 
+    @JsonIgnore
     public String getUnderScoreAlias() {
         return String.format("%s_%s", os_family, os_arch).replaceAll(" ", "_");
     }
