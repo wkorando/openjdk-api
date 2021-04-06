@@ -20,3 +20,4 @@ jobs:
           java-version: '16'
           architecture: x64
       - run: java -version
+      - run: mvn -version
