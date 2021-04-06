@@ -1,0 +1,18 @@
+{
+  "release_info" : {
+    "operating_system" : {
+      "underScoreAlias" : "windows_x64",
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "build_number" : "2-51",
+      "major" : "17",
+      "minor" : "panama",
+      "type" : "jdk-project-pea",
+      "version" : "17+2-51"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/panama/2/openjdk-17-panama+2-51_windows-x64_bin.zip"
+}

@@ -1,0 +1,18 @@
+{
+  "release_info" : {
+    "operating_system" : {
+      "underScoreAlias" : "linux_x64",
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "1-1",
+      "major" : "15",
+      "minor" : "metropolis",
+      "type" : "jdk-project-pea",
+      "version" : "15+1-1"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/metropolis/1/openjdk-15-metropolis+1-1_linux-x64_bin.tar.gz"
+}

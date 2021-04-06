@@ -1,0 +1,17 @@
+{
+  "release_info" : {
+    "operating_system" : {
+      "underScoreAlias" : "alpine_linux_x64",
+      "os_family" : "alpine linux",
+      "os_arch" : "x64",
+      "alias" : "alpine linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/alpine/14/binaries/openjdk-17-ea+14_linux-x64-musl_bin.tar.gz"
+}

@@ -1,5 +1,6 @@
 package net.openjdk.api.datasource;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.openjdk.api.v1.release.binary.model.BinarySchema;
 import net.openjdk.api.v1.release.information.models.InfoSchema;
 import net.openjdk.api.v1.release.operating_systems.models.OSSchema;
@@ -16,6 +17,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -246,6 +250,34 @@ public class JDKNet implements DataSourceInterface {
                 v -> res.addAll(getBinariesBy(v.getMajor()).toList())
         );
         return res;
+    }
+
+    public void persistDetailedReleaseBinaries(String localStore) {
+        var mapper = new ObjectMapper().writerWithDefaultPrettyPrinter();
+        getListOfAvailableVersions().toList().forEach(version -> {
+            getBinariesBy(version.getMajor()).forEach(binaryRelease -> {
+                try {
+                    var major = version.getMajor();
+                    var os = binaryRelease.getReleaseInfo().getOSSchema();
+
+                    var versionPath = Path.of(localStore + "/" + major);
+                    if (Files.notExists(versionPath)) {
+                        Files.createDirectory(versionPath);
+                    }
+
+                    var fmtJson = String.format(
+                            "%s/%s/%s.%s.%s.json", localStore,
+                            major, os.getUnderScoreAlias(),
+                            version.getVersionID(), version.getVersion()
+                    );
+                    mapper.writeValue(Path.of(fmtJson).toFile(), binaryRelease);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.exit(1);
+                }
+            });
+        });
     }
 
 }

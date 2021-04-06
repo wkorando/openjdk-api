@@ -20,6 +20,10 @@ public class OSSchema {
         return String.format("%s/%s", os_family, os_arch);
     }
 
+    public String getUnderScoreAlias() {
+        return String.format("%s_%s", os_family, os_arch).replaceAll(" ", "_");
+    }
+
     public Boolean isMatchByOSFamily(String os_family) {
         return this.os_family.equalsIgnoreCase(os_family);
     }

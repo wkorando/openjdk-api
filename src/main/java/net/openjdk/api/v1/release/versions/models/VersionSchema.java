@@ -43,11 +43,14 @@ public class VersionSchema {
 
         // what if build number is not present?
         // what if minor and security is not present?
-        var fmt = "%s.%s.%s";
+        var fmt = "%s%s%s";
         if (!buildNumber.isEmpty()) {
             fmt += "+%s";
         }
-        return String.format(fmt, major, minor, security, buildNumber);
+        return String.format(fmt, major,
+                minor.isEmpty() ? "" : "." + minor,
+                security.isEmpty() ? "" : "." + security,
+                buildNumber);
     }
 
     @JsonIgnore
@@ -58,6 +61,11 @@ public class VersionSchema {
     @JsonIgnore
     public String getMajor() {
         return major;
+    }
+
+    @JsonIgnore
+    public String getMinor() {
+        return minor;
     }
 
     public Boolean isMatch(String version) {
@@ -76,6 +84,22 @@ public class VersionSchema {
         VersionSchema that = (VersionSchema) o;
 
         return toString().equalsIgnoreCase(that.toString());
+    }
+
+    @JsonIgnore
+    public String getVersionID() {
+        var part = "";
+        var versionType = getVersionType();
+        if (versionType.startsWith(VersionTypeSchema.ProjectEA())) {
+            part = String.format("jdk-%s", getMinor());
+        }
+        if (versionType.startsWith(VersionTypeSchema.EA())) {
+            part = VersionTypeSchema.EA();
+        }
+        if (versionType.startsWith(VersionTypeSchema.GA())) {
+            part = VersionTypeSchema.GA();
+        }
+        return part;
     }
 
 }
