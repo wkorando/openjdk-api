@@ -1,4 +1,4 @@
-{
+[ {
   "release_info" : {
     "operating_system" : {
       "os_family" : "macos",
@@ -12,4 +12,4 @@
     }
   },
   "binary_url" : "https://download.java.net/java/early_access/lanai/3/openjdk-17-lanai+3-133_osx-x64_bin.tar.gz"
-}
+} ]

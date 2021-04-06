@@ -1,0 +1,172 @@
+[ {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "aarch64",
+      "alias" : "linux/aarch64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/jdk17/16/GPL/openjdk-17-ea+16_linux-aarch64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/jdk17/16/GPL/openjdk-17-ea+16_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/jdk17/16/GPL/openjdk-17-ea+16_osx-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/jdk17/16/GPL/openjdk-17-ea+16_windows-x64_bin.zip"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "alpine linux",
+      "os_arch" : "x64",
+      "alias" : "alpine linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "16",
+      "major" : "17",
+      "type" : "jdk-ea",
+      "version" : "17+16"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/alpine/14/binaries/openjdk-17-ea+14_linux-x64-musl_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "6-225",
+      "major" : "17",
+      "minor" : "loom",
+      "type" : "jdk-project-pea",
+      "version" : "17+6-225"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/loom/6/openjdk-17-loom+6-225_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "build_number" : "6-225",
+      "major" : "17",
+      "minor" : "loom",
+      "type" : "jdk-project-pea",
+      "version" : "17+6-225"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/loom/6/openjdk-17-loom+6-225_osx-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "build_number" : "6-225",
+      "major" : "17",
+      "minor" : "loom",
+      "type" : "jdk-project-pea",
+      "version" : "17+6-225"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/loom/6/openjdk-17-loom+6-225_windows-x64_bin.zip"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "2-51",
+      "major" : "17",
+      "minor" : "panama",
+      "type" : "jdk-project-pea",
+      "version" : "17+2-51"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/panama/2/openjdk-17-panama+2-51_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "build_number" : "2-51",
+      "major" : "17",
+      "minor" : "panama",
+      "type" : "jdk-project-pea",
+      "version" : "17+2-51"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/panama/2/openjdk-17-panama+2-51_osx-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "build_number" : "2-51",
+      "major" : "17",
+      "minor" : "panama",
+      "type" : "jdk-project-pea",
+      "version" : "17+2-51"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/panama/2/openjdk-17-panama+2-51_windows-x64_bin.zip"
+} ]

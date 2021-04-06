@@ -1,7 +1,6 @@
 {
   "release_info" : {
     "operating_system" : {
-      "underScoreAlias" : "linux_x64",
       "os_family" : "linux",
       "os_arch" : "x64",
       "alias" : "linux/x64"

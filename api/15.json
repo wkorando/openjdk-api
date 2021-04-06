@@ -1,0 +1,81 @@
+[ {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "aarch64",
+      "alias" : "linux/aarch64"
+    },
+    "version_info" : {
+      "major" : "15",
+      "minor" : "0",
+      "security" : "2",
+      "type" : "jdk-ga",
+      "version" : "15.0.2"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk15.0.2/0d1cfde4252546c6931946de8db48ee2/7/GPL/openjdk-15.0.2_linux-aarch64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "major" : "15",
+      "minor" : "0",
+      "security" : "2",
+      "type" : "jdk-ga",
+      "version" : "15.0.2"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk15.0.2/0d1cfde4252546c6931946de8db48ee2/7/GPL/openjdk-15.0.2_linux-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "major" : "15",
+      "minor" : "0",
+      "security" : "2",
+      "type" : "jdk-ga",
+      "version" : "15.0.2"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk15.0.2/0d1cfde4252546c6931946de8db48ee2/7/GPL/openjdk-15.0.2_osx-x64_bin.tar.gz"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "major" : "15",
+      "minor" : "0",
+      "security" : "2",
+      "type" : "jdk-ga",
+      "version" : "15.0.2"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/GA/jdk15.0.2/0d1cfde4252546c6931946de8db48ee2/7/GPL/openjdk-15.0.2_windows-x64_bin.zip"
+}, {
+  "release_info" : {
+    "operating_system" : {
+      "os_family" : "linux",
+      "os_arch" : "x64",
+      "alias" : "linux/x64"
+    },
+    "version_info" : {
+      "build_number" : "1-1",
+      "major" : "15",
+      "minor" : "metropolis",
+      "type" : "jdk-project-pea",
+      "version" : "15+1-1"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/metropolis/1/openjdk-15-metropolis+1-1_linux-x64_bin.tar.gz"
+} ]
