@@ -254,17 +254,26 @@ public class JDKNet implements DataSourceInterface {
 
     public void persistDetailedReleaseBinaries(String localStore) {
         var mapper = new ObjectMapper().writerWithDefaultPrettyPrinter();
-        getListOfAvailableVersions().toList().forEach(version -> {
-            getBinariesBy(version.getMajor()).forEach(binaryRelease -> {
+        getListOfAvailableVersions().forEach(version -> {
+
+            var versionJsonPath = Path.of(localStore + "/" + version.getMajor() + ".json");
+            var allBins = getBinariesBy(version.getMajor()).toList();
+            try {
+                mapper.writeValue(versionJsonPath.toFile(), allBins);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
+
+            allBins.forEach(binaryRelease -> {
                 try {
                     var major = version.getMajor();
                     var os = binaryRelease.getReleaseInfo().getOSSchema();
 
-                    var versionPath = Path.of(localStore + "/" + major);
-                    if (Files.notExists(versionPath)) {
-                        Files.createDirectory(versionPath);
+                    var versionDirPath = Path.of(localStore + "/" + major);
+                    if (Files.notExists(versionDirPath)) {
+                        Files.createDirectory(versionDirPath);
                     }
-
                     var fmtJson = String.format(
                             "%s/%s/%s.%s.%s.json", localStore,
                             major, os.getUnderScoreAlias(),
