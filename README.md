@@ -34,5 +34,5 @@ java -jar target/api-1.0.jar --spring.config.location=file:application_config/ap
 ```shell
 mvn clean compile assembly:single
 
-java -jar target/api-1.0-jar-with-dependencies.jar
+java -jar target/api-1.0.jar
 ```

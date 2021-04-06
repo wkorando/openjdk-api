@@ -1,0 +1,16 @@
+{
+  "release_info" : {
+    "operating_system" : {
+      "underScoreAlias" : "macos_x64",
+      "os_family" : "macos",
+      "os_arch" : "x64",
+      "alias" : "macos/x64"
+    },
+    "version_info" : {
+      "major" : "lanai",
+      "type" : "jdk-project-pea",
+      "version" : "lanai+"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/lanai/3/openjdk-17-lanai+3-133_osx-x64_bin.tar.gz"
+}

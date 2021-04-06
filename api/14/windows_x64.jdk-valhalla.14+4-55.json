@@ -1,0 +1,18 @@
+{
+  "release_info" : {
+    "operating_system" : {
+      "underScoreAlias" : "windows_x64",
+      "os_family" : "windows",
+      "os_arch" : "x64",
+      "alias" : "windows/x64"
+    },
+    "version_info" : {
+      "build_number" : "4-55",
+      "major" : "14",
+      "minor" : "valhalla",
+      "type" : "jdk-project-pea",
+      "version" : "14+4-55"
+    }
+  },
+  "binary_url" : "https://download.java.net/java/early_access/valhalla/4/openjdk-14-valhalla+4-55_windows-x64_bin.zip"
+}
