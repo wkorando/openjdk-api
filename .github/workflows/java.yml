@@ -19,5 +19,5 @@ jobs:
           jdkFile: ${{ runner.temp }}/java_package.tar.gz
           java-version: '16'
           architecture: x64
-      - run: java -version
-      - run: mvn -version
+      - run: mvn clean compile assembly:single
+      - run: java -jar target/api-1.0.jar
