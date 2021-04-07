@@ -11,7 +11,7 @@ public class OSSchema {
     @JsonProperty("os_arch")
     protected final String os_arch;
 
-    public OSSchema(String os_arch, String os_family) {
+    public OSSchema(@JsonProperty("os_family")String os_arch,@JsonProperty("os_arch") String os_family) {
         this.os_arch = os_arch;
         this.os_family = os_family;
     }

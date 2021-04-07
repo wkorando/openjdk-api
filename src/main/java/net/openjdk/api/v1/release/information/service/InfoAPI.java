@@ -7,20 +7,18 @@ import net.openjdk.api.v1.release.binary.model.OpenAPI_BinarySchema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class InfoAPI {
 
-    @Autowired
-    private DataSourceInterface dataSource;
+	private DataSourceInterface dataSource;
 
-    public ObjectNode getListOfReleasesBy(
-            String version,
-            String os_family,
-            String os_arch
-    ) {
-        var r = dataSource.getListOfReleasesBy(version, os_family, os_arch);
-        return JSONUtil.listOfObjectsToJson(OpenAPI_BinarySchema.key, r);
-    }
+	public InfoAPI(DataSourceInterface dataSource) {
+		this.dataSource = dataSource;
+	}
+
+	public ObjectNode getListOfReleasesBy(String version, String os_family, String os_arch) {
+		var r = dataSource.getListOfReleasesBy(version, os_family, os_arch);
+		return JSONUtil.listOfObjectsToJson(OpenAPI_BinarySchema.key, r);
+	}
 
 }

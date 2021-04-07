@@ -7,19 +7,17 @@ import net.openjdk.api.v1.release.binary.model.OpenAPI_BinarySchema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class OSAPI {
 
-    @Autowired
-    DataSourceInterface dataSource;
+	DataSourceInterface dataSource;
 
-    public OSAPI() {}
+	public OSAPI(DataSourceInterface dataSource) {
+		this.dataSource = dataSource;
+	}
 
-    public ObjectNode getJSON() {
-        return JSONUtil.listOfObjectsToJson(
-                OpenAPI_BinarySchema.key, dataSource.getListOfSupportedOperationSystems()
-        );
-    }
+	public ObjectNode getJSON() {
+		return JSONUtil.listOfObjectsToJson(OpenAPI_BinarySchema.key, dataSource.getListOfSupportedOperationSystems());
+	}
 
 }

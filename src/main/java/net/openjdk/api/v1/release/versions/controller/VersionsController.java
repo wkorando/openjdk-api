@@ -1,6 +1,5 @@
 package net.openjdk.api.v1.release.versions.controller;
 
-
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -19,29 +18,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping("/v1/release")
 @Tag(name = "OpenJDK version API")
 public class VersionsController {
 
-    @Autowired
-    private VersionsAPI versioAPI;
+	private VersionsAPI versioAPI;
 
-    @Operation(summary = "Get a list of all available OpenJDK versions")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Found OpenJDK versions",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = OpenAPI_OSSchema.class)) })
-    })
-    @RequestMapping(
-            value = "/versions",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            method = RequestMethod.GET
-    )
-    @ResponseStatus(HttpStatus.OK)
-    public ObjectNode versions() {
-        return versioAPI.toJSON();
-    }
+	public VersionsController(VersionsAPI versioAPI) {
+		this.versioAPI = versioAPI;
+	}
+
+	@Operation(summary = "Get a list of all available OpenJDK versions")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Found OpenJDK versions", content = {
+			@Content(mediaType = "application/json", schema = @Schema(implementation = OpenAPI_OSSchema.class)) }) })
+	@RequestMapping(value = "/versions", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	public ObjectNode versions() {
+		return versioAPI.toJSON();
+	}
 
 }

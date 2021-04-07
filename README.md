@@ -25,6 +25,7 @@ mvn spring-boot:run
 ```
 
 Supplying custom `application.properties`:
+
 ```bash
 java -jar target/api-1.0.jar --spring.config.location=file:application_config/application.properties
 ```
